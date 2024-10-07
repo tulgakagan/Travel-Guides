@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Travel Guides</title>
+    <!-- bulma CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+
+    <!-- font awesome cdn -->
+    <script
+      src="https://kit.fontawesome.com/8a80b728dc.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- favicon hehe -->
+    <link rel="shortcut icon" type="image/png" href="images/plane.png" />
+  </head>
+  <header class="has-background-dark has-text-white py-4">
+    <!-- NAVBAR -->
+    <div id="navbar">
+      <ul
+        class="navbar-menu has-background-dark is-flex-touch is-flex-wrap-wrap"
+      >
+        <li class="navButtons">
+          <img
+            id="plane"
+            class="navbar-item"
+            src="images/plane.png"
+            alt="plane"
+            style="width: 50px"
+          />
+        </li>
+        <li class="navButtons">
+          <div class="navbar-item">
+            <a id="home" class="has-background-dark has-text-white">Home</a>
+          </div>
+        </li>
+        <li class="navButtons">
+          <div class="navbar-item">
+            <a id="contactus" class="has-background-dark has-text-white"
+              >Contact Us</a
+            >
+          </div>
+        </li>
+        <li class="navbar-item navbar-end">
+          <a id="user_email" class="mx-3 has-text-danger signedin"></a>
+
+          <a
+            id="signupbtn"
+            class="mx-3 signedout has-background-dark has-text-white"
+            >Sign Up</a
+          >
+
+          <a
+            id="signinbtn"
+            class="mx-3 signedout has-background-dark has-text-white"
+            >Sign In</a
+          >
+
+          <a
+            id="signoutbtn"
+            class="signedin mx-3 has-background-dark has-text-white"
+            >Sign Out</a
+          >
+        </li>
+      </ul>
+    </div>
+  </header>
+  <!-- message bar -->
+  <div
+    id="message_bar"
+    class="has-text-centered has-background-danger-light is-hidden p-3"
+  ></div>
+
+  <!-- content switcher -->
+  <body class="has-background-white-ter">
+    <!-- modal -->
+    <div class="modal" id="signup_modal">
+      <div class="modal-background" id="signup_modalbg"></div>
+      <div class="modal-content p-6 has-background-white">
+        <h1 class="is-size-3 title">Sign Up!</h1>
+        <form id="signup_form">
+          <!-- Email -->
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input type="email" id="email" />
+            </div>
+          </div>
+          <!-- Password -->
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input type="password" id="password" />
+            </div>
+          </div>
+
+          <!-- submit -->
+          <div class="field">
+            <div class="control">
+              <button class="m-3 button is-link">Submit</button>
+            </div>
+          </div>
+
+          <!-- div error -->
+          <div id="signup_error" class="error has-text-danger"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- sign in modal -->
+    <div class="modal" id="signin_modal">
+      <div class="modal-background" id="signin_modalbg"></div>
+      <div class="modal-content p-6 has-background-white">
+        <h1 class="is-size-3 title">Sign In!</h1>
+        <form id="signin_form">
+          <!-- Email -->
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input type="email" id="email_" />
+            </div>
+          </div>
+          <!-- Password -->
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input type="password" id="password_" />
+            </div>
+          </div>
+
+          <!-- submit -->
+          <div class="field">
+            <div class="control">
+              <button class="m-3 button is-link">Submit</button>
+            </div>
+          </div>
+
+          <!-- div error -->
+          <div id="signin_error" class="error has-text-danger"></div>
+        </form>
+      </div>
+    </div>
+    <div id="ddiv">
+      <main>
+        <div
+          id="intro"
+          class="has-text-black has-text-centered py-6"
+          style="background-image: url('images/stock.jpg')"
+        >
+          <h1 class="is-size-2 has-text-weight-bold">
+            Welcome to Your Next Adventure
+          </h1>
+          <p>
+            Discover, explore, and review your favorite travel destinations
+            around the globe.
+          </p>
+        </div>
+        <div class="is-flex is-flex-wrap-wrap columns">
+          <div id="filter" class="column is-one-fifth is-full-mobile mt-3">
+            <div id="searchBar" class="field has-addons">
+              <div class="control is-expanded">
+                <div class="my-2">
+                  <h2 class="title is-6 has-text-centered is-flex-wrap-nowrap">
+                    Filter Destinations
+                  </h2>
+                </div>
+              </div>
+              <div class="control">
+                <button id="filter_search" class="button is-info mr-2">
+                  Filter
+                </button>
+              </div>
+            </div>
+            <div class="ml-5 checkbox has-background-white p-3">
+              <label
+                ><input type="checkbox" class="mt-2" id="checkbox1" /> Mexico
+                City</label
+              ><br />
+              <label
+                ><input type="checkbox" class="mt-2" id="checkbox2" />
+                Istanbul</label
+              ><br />
+              <label
+                ><input type="checkbox" class="mt-2" id="checkbox3" />
+                Cancun</label
+              ><br />
+              <label
+                ><input type="checkbox" class="mt-2" id="checkbox4" />
+                Kyoto</label
+              ><br />
+              <label
+                ><input type="checkbox" class="mt-2" id="checkbox5" />
+                Queenstown</label
+              ><br />
+              <label
+                ><input type="checkbox" class="mt-2" id="checkbox6" />
+                Santorini</label
+              ><br />
+              <label
+                ><input type="checkbox" class="mt-2" id="checkbox7" />
+                Munich</label
+              ><br />
+              <label
+                ><input type="checkbox" class="mt-2" id="checkbox8" />
+                Paris</label
+              ><br />
+              <label
+                ><input type="checkbox" class="mt-2" id="checkbox9" />
+                Milan</label
+              ><br />
+              <label
+                ><input type="checkbox" class="mt-2" id="checkbox10" />
+                Cairo</label
+              ><br />
+              <label
+                ><input type="checkbox" class="mt-2" id="checkbox11" /> Rio de
+                Janeiro</label
+              >
+            </div>
+          </div>
+          <div
+            id="cities"
+            class="column is-three-fifths is-full-mobile is-justify-content-space-around py-4 px-4"
+          >
+            <article class="box city mt-2 mx-4 py-2 px-4">
+              <h2 class="has-text-weight-bold is-size-4 mb-3">
+                Mexico City, Mexico
+              </h2>
+              <img src="images/mexco.webp" alt="Mexico City" />
+              <p>
+                An amazing blend of ancient history with modern vibrancy, full
+                of rich culture, iconic landmarks, and delectable cuisine.
+                Explore archaeological wonders like the Templo Mayor or
+                Chapultepec Castle. Walk through bustling markets or embrace the
+                city's artistic spirit seen through colorful murals. With its
+                lively atmosphere and endless attractions, Mexico City promises
+                an unforgettable journey through Mexico's past and present.
+              </p>
+
+              <div id="Mexico_City_com" class="signedin"></div>
+              <button
+                id="Mexico_City_button"
+                class="button signedin is-link is-rounded is-small mt-2"
+              >
+                Read Reviews
+              </button>
+              <button
+                id="Mexico_City_close"
+                class="hide is-hidden button is-link is-rounded is-small mt-2"
+              >
+                Hide Reviews
+              </button>
+            </article>
+            <article class="box city m-4 py-2 px-4">
+              <h2 class="has-text-weight-bold is-size-4 mb-3">
+                Istanbul, Turkey
+              </h2>
+              <img src="images/istanbul.jpg" alt="Istanbul" />
+              <p>
+                A fusion of East and West, Istanbul enchants with its
+                breathtaking architecture, bustling bazaars, and rich history.
+                Explore iconic landmarks like the Hagia Sophia and the Blue
+                Mosque, or visit the streets of the Grand Bazaar. Try out
+                delicious new foods or cruise the Bosphorous.
+              </p>
+              <div id="Istanbul_com" class="signedin"></div>
+              <button
+                id="Istanbul_button"
+                class="button signedin is-link is-rounded is-small mt-2"
+              >
+                Read Reviews
+              </button>
+              <button
+                id="Istanbul_close"
+                class="hide is-hidden button is-link is-rounded is-small mt-2"
+              >
+                Hide Reviews
+              </button>
+            </article>
+            <article class="box city m-4 py-2 px-4">
+              <h2 class="has-text-weight-bold is-size-4 mb-3">
+                Cancun, Mexico
+              </h2>
+              <img src="images/cancun.jpg" alt="Cancun" />
+              <p>
+                With its pristine beaches, vibrant nightlife, and ancient Mayan
+                ruins, Cancun offers the perfect blend of relaxation and
+                adventure. Lounge on powdery white sands, dive into
+                crystal-clear waters teeming with marine life, and explore the
+                nearby archaeological wonders of Chichen Itza and Tulum.
+              </p>
+              <div id="Cancun_com" class="signedin"></div>
+              <button
+                id="Cancun_button"
+                class="button signedin is-link is-rounded is-small mt-2"
+              >
+                Read Reviews
+              </button>
+              <button
+                id="Cancun_close"
+                class="hide is-hidden button is-link is-rounded is-small mt-2"
+              >
+                Hide Reviews
+              </button>
+            </article>
+            <article class="box city m-4 py-2 px-4">
+              <h2 class="has-text-weight-bold is-size-4 mb-3">Kyoto, Japan</h2>
+              <img src="images/kyoto.jpg" alt="Kyoto" />
+              <p>
+                A serene oasis of tradition and beauty, Kyoto captivates with
+                its stunning temples, serene gardens, and timeless rituals.
+                Immerse yourself in the tranquility of bamboo forests, witness
+                the elegance of geisha performances, and wander through
+                centuries-old shrines like Fushimi Inari Taisha.
+              </p>
+              <div id="Kyoto_com" class="signedin"></div>
+              <button
+                id="Kyoto_button"
+                class="button signedin is-link is-rounded is-small mt-2"
+              >
+                Read Reviews
+              </button>
+              <button
+                id="Kyoto_close"
+                class="hide is-hidden button is-link is-rounded is-small mt-2"
+              >
+                Hide Reviews
+              </button>
+            </article>
+            <article class="box city m-4 py-2 px-4">
+              <h2 class="has-text-weight-bold is-size-4 mb-3">
+                Queenstown, New Zealand
+              </h2>
+              <img src="images/nz.webp" alt="Queenstown" />
+              <p>
+                Nestled amidst New Zealand's majestic Southern Alps, Queenstown
+                beckons with its breathtaking landscapes and adrenaline-fueled
+                adventures. Ski down pristine slopes in winter, bungee jump over
+                scenic gorges, and cruise the tranquil waters of Lake Wakatipu
+                for awe-inspiring views.
+              </p>
+              <div id="Queenstown_com" class="signedin"></div>
+              <button
+                id="Queenstown_button"
+                class="button signedin is-link is-rounded is-small mt-2"
+              >
+                Read Reviews
+              </button>
+              <button
+                id="Queenstown_close"
+                class="hide is-hidden button is-link is-rounded is-small mt-2"
+              >
+                Hide Reviews
+              </button>
+            </article>
+            <article class="box city m-4 py-2 px-4">
+              <h2 class="has-text-weight-bold is-size-4 mb-3">
+                Santorini, Greece
+              </h2>
+              <img src="images/santorini.avif" alt="Santorini" />
+              <p>
+                A postcard-perfect paradise in the Aegean Sea, Santorini
+                captivates with its stunning sunsets, whitewashed buildings, and
+                azure waters. Explore charming villages perched atop dramatic
+                cliffs, unwind on black sand beaches, and savor mouthwatering
+                Greek cuisine overlooking the caldera.
+              </p>
+              <div id="Santorini_com" class="signedin"></div>
+              <button
+                id="Santorini_button"
+                class="button signedin is-link is-rounded is-small mt-2"
+              >
+                Read Reviews
+              </button>
+              <button
+                id="Santorini_close"
+                class="hide is-hidden button is-link is-rounded is-small mt-2"
+              >
+                Hide Reviews
+              </button>
+            </article>
+            <article class="box city m-4 py-2 px-4">
+              <h2 class="has-text-weight-bold is-size-4 mb-3">
+                Munich, Germany
+              </h2>
+              <img src="images/munich.jpeg" alt="munich" />
+              <p>
+                Munich, Germany, beckons as a vibrant cultural hub steeped in
+                rich history and tradition. This iconic city is renowned for its
+                picturesque architecture, sprawling green parks, and the
+                world-famous Oktoberfest. Stroll through the historic
+                Marienplatz, marvel at the Gothic grandeur of the New Town Hall,
+                or explore the vast collections of the Deutsches Museum. Indulge
+                in Bavarian culinary delights in cozy beer gardens or
+                sophisticated restaurants, all set against a backdrop of alpine
+                scenery and urban sophistication.
+              </p>
+              <div id="Munich_com" class="signedin"></div>
+              <button
+                id="Munich_button"
+                class="button signedin is-link is-rounded is-small mt-2"
+              >
+                Read Reviews
+              </button>
+              <button
+                id="Munich_close"
+                class="hide is-hidden button is-link is-rounded is-small mt-2"
+              >
+                Hide Reviews
+              </button>
+            </article>
+            <article class="box city m-4 py-2 px-4">
+              <h2 class="has-text-weight-bold is-size-4 mb-3">Paris, France</h2>
+              <img src="images/paris.jpeg" alt="paris" />
+              <p>
+                Paris stands as the epitome of romance, art, and elegance. Known
+                as the "City of Light," Paris enchants visitors with its
+                unparalleled museums, iconic landmarks like the Eiffel Tower and
+                Notre-Dame, and its chic cafés lining cobblestone streets.
+                Stroll along the Seine, browse through the treasures of the
+                Louvre, or enjoy a leisurely afternoon in the Luxembourg
+                Gardens. As night falls, the city transforms with glowing street
+                lamps and bustling bistros, offering a taste of its
+                world-renowned cuisine and vibrant nightlife. Paris is not just
+                a city; it's a canvas of experiences waiting to captivate your
+                heart.
+              </p>
+              <div id="Paris_com" class="signedin"></div>
+              <button
+                id="Paris_button"
+                class="button signedin is-link is-rounded is-small mt-2"
+              >
+                Read Reviews
+              </button>
+              <button
+                id="Paris_close"
+                class="hide is-hidden button is-link is-rounded is-small mt-2"
+              >
+                Hide Reviews
+              </button>
+            </article>
+            <article class="box city m-4 py-2 px-4">
+              <h2 class="has-text-weight-bold is-size-4 mb-3">Milan, Italy</h2>
+              <img src="images/milan.jpeg" alt="milan" />
+              <p>
+                A powerhouse of fashion, design, and innovation, Milan
+                seamlessly blends its rich historical tapestry with modern
+                sophistication. The city is home to iconic landmarks such as the
+                majestic Duomo Cathedral and the historic Sforza Castle,
+                juxtaposed with cutting-edge skyscrapers and bustling shopping
+                districts. Explore the artistic legacy of Leonardo da Vinci, or
+                immerse yourself in the vibrant scene of Milan Fashion Week.
+                Unwind in the lush Sempione Park, or indulge in Milanese
+                culinary delights like risotto alla Milanese. Captivating with
+                its lively cultural scene, Milan embodies an unwavering spirit
+                of modernity.
+              </p>
+              <div id="Milan_com" class="signedin"></div>
+              <button
+                id="Milan_button"
+                class="button signedin is-link is-rounded is-small mt-2"
+              >
+                Read Reviews
+              </button>
+              <button
+                id="Milan_close"
+                class="hide is-hidden button is-link is-rounded is-small mt-2"
+              >
+                Hide Reviews
+              </button>
+            </article>
+            <article class="box city m-4 py-2 px-4">
+              <h2 class="has-text-weight-bold is-size-4 mb-3">Cairo, Egypt</h2>
+              <img src="images/cairo.jpg" alt="cairo" />
+              <p>
+                A city where ancient history meets bustling urban life, Cairo is
+                a mesmerizing blend of timelessness and modernity. Dominated by
+                the majestic silhouette of the Pyramids of Giza, Cairo is also
+                home to an impressive array of historic sites, including the
+                Sphinx and the vast Egyptian Museum. Wander through the colorful
+                alleys of Khan El-Khalili bazaar, soaking in the vibrant
+                atmosphere and the scent of spices. Cairo's streets pulse with
+                life, offering an eclectic mix of old and new. From sampling
+                traditional Egyptian dishes at a local café to cruising down the
+                Nile at sunset, Cairo offers an experience steeped in history
+                and rich cultural heritage.
+              </p>
+              <div id="Cairo_com" class="signedin"></div>
+              <button
+                id="Cairo_button"
+                class="button signedin is-link is-rounded is-small mt-2"
+              >
+                Read Reviews
+              </button>
+              <button
+                id="Cairo_close"
+                class="hide is-hidden button is-link is-rounded is-small mt-2"
+              >
+                Hide Reviews
+              </button>
+            </article>
+            <article class="box city m-4 py-2 px-4">
+              <h2 class="has-text-weight-bold is-size-4 mb-3">
+                Rio de Janeiro, Brazil
+              </h2>
+              <img src="images/rio.webp" alt="Rio de Janeiro" />
+              <p>
+                Rio de Janeiro, the pulsating soul of Brazil, offers a stunning
+                blend of natural beauty, vibrant culture, and lively
+                festivities. Framed by breathtaking landscapes of mountains,
+                rainforests, and world-renowned beaches like Copacabana and
+                Ipanema, Rio is a city that dances to the rhythm of samba and
+                bossa nova. Iconic landmarks such as the towering Christ the
+                Redeemer statue and Sugarloaf Mountain offer panoramic views of
+                the city's sprawling beauty. Delve into the local culture at
+                bustling street markets, colorful Carnival parades, and
+                sun-drenched beachfronts. With its warm, welcoming spirit and
+                infectious energy, Rio de Janeiro captures the essence of
+                Brazilian joie de vivre.
+              </p>
+              <div id="RioDeJaneiro_com" class="signedin"></div>
+              <button
+                id="RioDeJaneiro_button"
+                class="button signedin is-link is-rounded is-small mt-2"
+              >
+                Read Reviews
+              </button>
+              <button
+                id="RioDeJaneiro_close"
+                class="hide is-hidden button is-link is-rounded is-small mt-2"
+              >
+                Hide Reviews
+              </button>
+            </article>
+          </div>
+          <div
+            id="no_reviews"
+            class="signedout column is-one-fifth is-full-mobile my-3 mt-4 has-text-centered"
+          >
+            <p>Sign in to Leave Reviews!</p>
+          </div>
+          <div
+            id="reviews"
+            class="column signedin is-one-fifth is-full-mobile mt-4"
+          >
+            <form id="reviewForm">
+              <p>Your City:</p>
+              <select id="filterDropdown">
+                <option value="Mexico_City">Mexico City</option>
+                <option value="Istanbul">Istanbul</option>
+                <option value="Cancun">Cancun</option>
+                <option value="Kyoto">Kyoto</option>
+                <option value="Queenstown">Queenstown</option>
+                <option value="Santorini">Santorini</option>
+                <option value="Munich">Munich</option>
+                <option value="Paris">Paris</option>
+                <option value="Milan">Milan</option>
+                <option value="Cairo">Cairo</option>
+                <option value="RioDeJaneiro">Rio de Janeiro</option>
+              </select>
+              <div>
+                <br />
+
+                <label id="reviewText" class="block">Your Review:</label>
+                <br />
+                <textarea
+                  id="reviewMessage"
+                  class="block"
+                  style="height: 300px; width: 90%"
+                  placeholder="Your review..."
+                ></textarea>
+              </div>
+
+              <div class="field">
+                <label class="block">Rating:</label>
+                <div class="control">
+                  <label class="radio">
+                    <input type="radio" name="rating" value="1" />
+                    1
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="rating" value="2" />
+                    2
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="rating" value="3" />
+                    3
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="rating" value="4" />
+                    4
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="rating" value="5" />
+                    5
+                  </label>
+                </div>
+              </div>
+              <button
+                id="review_submit"
+                class="button is-small m-1"
+                type="button"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+        <p id="response_form"></p>
+      </main>
+    </div>
+  </body>
+  <footer class="has-background-dark has-text-white has-text-centered py-4">
+    <p>© 2024 Created by Vinessa Verheyen & Tulga Temel</p>
+  </footer>
+  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+  <script>
+    // TODO
+    const firebaseConfig = {
+      apiKey: "AIzaSyCAX5Yxyv5Lj_QUg2PODo-lc9AayRAHMrY",
+      authDomain: "travel-guides-help.firebaseapp.com",
+      projectId: "travel-guides-help",
+      storageBucket: "travel-guides-help.appspot.com",
+      messagingSenderId: "198513047368",
+      appId: "1:198513047368:web:5cc4e5cc9b40971d2aa57d",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // define authentication variable
+    let auth = firebase.auth();
+    let db = firebase.firestore();
+
+    let ref = firebase.firestore().ref;
+  </script>
+  <script src="app.js"></script>
+</html>
